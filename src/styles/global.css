@@ -21,7 +21,7 @@
 	--accent-dark: #3772FF;
 	--accent-overlay: #3772FF;
 	--accent-subtle-overlay: var(--accent-overlay);
-	--accent-text-over: var(--gray-999);
+	--accent-text-over: var(--accent-light);
 
 	--link-color: var(--accent-regular);
 
