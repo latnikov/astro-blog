@@ -1,8 +1,7 @@
 {
-  "name": "@example/basics",
+  "name": "second-spiral",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -11,6 +10,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.6.0"
+    "astro": "^2.0.17"
   }
 }

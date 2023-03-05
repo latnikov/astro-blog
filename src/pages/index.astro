@@ -1,105 +1,184 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import Pill from '../components/Pill.astro';
+
+import ContactCTA from '../components/ContactCTA.astro';
+import Skills from '../components/Skills.astro';
+
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <div class="wrapper">
-      <div class="info">
-        <h1>Max Latnikov</h1>
-		<p class="instructions">
-			Hexlet College teacher
-			<br>
-			JS-developer
-		</p>
-      </div>
-	  <div class="userpic">
-		<img src="https://pbs.twimg.com/profile_images/1556527509872807936/Y91M3uto_400x400.jpg" alt="me" />
-	  </div>
-    </div>
-	<ul role="list" class="link-card-grid">
-		<Card
-				href="https://www.notion.so/latnikou/JavaScript-2757dd3f667c4633aa880728103ca3c4"
-				title="For HR"
-				body="Take a look at my resume"
-			/>
-			<Card
-				href="#"
-				title="Links"
-				body="Social media stuff"
-			/>
-			<Card
-				href="#"
-				title="Portfolio"
-				body="I build stuff"
-			/>
-	</ul>
-  </main>
-</Layout>
+<BaseLayout>
+	<div class="stack gap-20 lg:gap-48">
+		<div class="wrapper stack gap-8 lg:gap-20">
+			<header class="hero">
+				<Hero
+					title="Hi, my name is Max"
+					tagline="For 3 years I have been strategically balancing between users, management, and technology in EdTech and beyond: I built products for adult education at Hexlet, children's education at Yandex and Innopolis"
+					align="start"
+				>
+					<div class="roles">
+						<Pill><Icon icon="code" size="1.33em" /> Dev </Pill>
+						<Pill><Icon icon="microphone-stage" size="1.33em" />Teacher</Pill>
+						<Pill><Icon icon="pencil-line" size="1.33em" ></Icon>Methodologist</Pill>
+					</div>
+				</Hero>
+
+				<img
+					alt="Сижу смотрю в рабочий ноутбук"
+					width="480"
+					height="620"
+					src="/assets/portrait.jpg"
+				/>
+			</header>
+
+			<Skills />
+		</div>
+		<ContactCTA />
+	</div>
+</BaseLayout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
-	line-height: 3rem;
-    text-align: left;
-	color: rgb(124, 58, 237);
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
-  }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
-  }
+	.hero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+	}
 
-  .wrapper {
-    display: flex;
-	justify-content: space-between;
-	gap: 3rem;
-  }
-
-  
-  .userpic img {
-	max-width: 200px;
-	border-radius: 0.4rem;
-  }
-
-  @media only screen and (max-width: 600px) {
-	img {
+	.roles {
 		display: none;
 	}
-  }
+
+	.hero img {
+		aspect-ratio: 5 / 4;
+		object-fit: cover;
+		object-position: top;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	@media (min-width: 50em) {
+		.hero {
+			display: grid;
+			grid-template-columns: 6fr 4fr;
+			padding-inline: 2.5rem;
+			gap: 3.75rem;
+		}
+
+		.roles {
+			margin-top: 0.5rem;
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		.hero img {
+			aspect-ratio: 3 / 4;
+			border-radius: 4.5rem;
+			object-fit: cover;
+		}
+	}
+
+	/* ====================================================== */
+
+	.section {
+		display: grid;
+		gap: 2rem;
+	}
+
+	.with-background {
+		position: relative;
+	}
+
+	.with-background::before {
+		--hero-bg: var(--bg-image-subtle-2);
+
+		content: '';
+		position: absolute;
+		pointer-events: none;
+		left: 50%;
+		width: 100vw;
+		aspect-ratio: calc(2.25 / var(--bg-scale));
+		top: 0;
+		transform: translateY(-75%) translateX(-50%);
+		background: url('/assets/backgrounds/noise.png') top center/220px repeat,
+			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999);
+		background-blend-mode: overlay, normal, normal, normal;
+		mix-blend-mode: var(--bg-blend-mode);
+		z-index: -1;
+	}
+
+	.with-background.bg-variant::before {
+		--hero-bg: var(--bg-image-subtle-1);
+	}
+
+	.section-header {
+		justify-self: center;
+		text-align: center;
+		max-width: 50ch;
+		font-size: var(--text-md);
+		color: var(--gray-300);
+	}
+
+	.section-header h3 {
+		font-size: var(--text-2xl);
+	}
+
+	@media (min-width: 50em) {
+		.section {
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
+			gap: 5rem;
+		}
+
+		.section.with-cta {
+			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
+		}
+
+		.section-header {
+			grid-area: header;
+			font-size: var(--text-lg);
+		}
+
+		.section-header h3 {
+			font-size: var(--text-4xl);
+		}
+
+		.with-cta .section-header {
+			justify-self: flex-start;
+			text-align: left;
+		}
+
+		.gallery {
+			grid-area: gallery;
+		}
+
+		.cta {
+			grid-area: cta;
+		}
+	}
+
+	/* ====================================================== */
+
+	.mention-card {
+		display: flex;
+		height: 7rem;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		color: var(--gray-300);
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+	}
+
+	@media (min-width: 50em) {
+		.mention-card {
+			border-radius: 1.5rem;
+			height: 9.5rem;
+		}
+	}
 </style>
